@@ -192,9 +192,12 @@ function etiquetaRiesgo(nivel) {
   return { bajo: 'Bajo', medio: 'Medio', alto: 'Alto' }[nivel] || nivel;
 }
 
+let ultimoHistorial = [];
+
 document.getElementById('btnVerHistorial').addEventListener('click', async () => {
   const resp = await fetch('/api/solicitudes');
   const data = await resp.json();
+  ultimoHistorial = data.solicitudes;
 
   const filas = data.solicitudes.map(s => `
     <tr>
@@ -225,4 +228,35 @@ document.getElementById('btnVerHistorial').addEventListener('click', async () =>
 document.getElementById('btnCerrarHistorial').addEventListener('click', () => {
   panelHistorial.classList.add('oculto');
   panelFormulario.classList.remove('oculto');
+});
+
+document.getElementById('btnExportarHistorial').addEventListener('click', () => {
+  if (!ultimoHistorial.length) return;
+
+  const encabezados = ['Folio', 'Nombre', 'Puntaje crediticio', 'Nivel de riesgo', 'Decision', 'Certeza (%)', 'Fecha'];
+  const filas = ultimoHistorial.map(s => [
+    s.id,
+    s.nombre,
+    s.puntaje_total ?? '',
+    etiquetaRiesgo(s.nivel_riesgo),
+    etiquetaDecision(s.decision).replace(/\s+/g, ' '),
+    (s.certeza * 100).toFixed(0),
+    s.creado_en
+  ]);
+
+  const escapar = valor => `"${String(valor).replace(/"/g, '""')}"`;
+  const csv = [encabezados, ...filas]
+    .map(fila => fila.map(escapar).join(';'))
+    .join('\r\n');
+
+  // El BOM al inicio asegura que Excel muestre correctamente acentos y ñ
+  const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const enlace = document.createElement('a');
+  enlace.href = url;
+  enlace.download = `historial_solicitudes_${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(enlace);
+  enlace.click();
+  document.body.removeChild(enlace);
+  URL.revokeObjectURL(url);
 });

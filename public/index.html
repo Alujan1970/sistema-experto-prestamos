@@ -8,125 +8,154 @@
 </head>
 <body>
   <header class="topbar">
-    <h1>Sistema Experto &mdash; Evaluacion de Prestamos Bancarios</h1>
-    <p class="subtitulo">Motor de inferencia basado en reglas &middot; Sistemas Basados en Conocimiento</p>
+    <div class="marca">
+      <svg class="logo-banco" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Banco Toján">
+        <circle cx="32" cy="32" r="30" fill="#0f2545" stroke="#c9a24b" stroke-width="2.5"/>
+        <!-- piramide escalonada, inspirada en la placa de Tojan -->
+        <rect x="13" y="45" width="38" height="5" rx="1" fill="#c9a24b"/>
+        <rect x="17" y="40" width="30" height="5" rx="1" fill="#c9a24b"/>
+        <rect x="21" y="35" width="22" height="5" rx="1" fill="#c9a24b"/>
+        <rect x="25" y="30" width="14" height="5" rx="1" fill="#c9a24b"/>
+        <!-- tallo de maiz -->
+        <line x1="32" y1="30" x2="32" y2="14" stroke="#c9a24b" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M32,25 C27,23 25,19 27,15" stroke="#c9a24b" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M32,21 C37,19 39,15 37,11" stroke="#c9a24b" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <ellipse cx="32" cy="13" rx="3.2" ry="5.5" fill="#c9a24b"/>
+      </svg>
+      <div>
+        <p class="nombre-banco">Banco Toján</p>
+        <h1>Sistema Experto &mdash; Evaluacion de Prestamos Bancarios</h1>
+        <p class="subtitulo">Motor de inferencia basado en reglas &middot; Sistemas Basados en Conocimiento</p>
+      </div>
+    </div>
   </header>
 
   <main class="contenedor">
     <section class="panel" id="panelFormulario">
-      <h2>1. Datos de contacto</h2>
       <form id="formSolicitud" novalidate>
-        <div class="campo">
-          <label for="nombre">Nombre completo</label>
-          <input type="text" id="nombre" name="nombre" required>
-        </div>
 
-        <div class="fila">
+        <div class="seccion-form">
+          <h2><span class="badge-numero">1</span>Datos de contacto</h2>
           <div class="campo">
-            <label for="correo">Correo electronico</label>
-            <input type="email" id="correo" name="correo" required>
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Ej. María Fernanda Ortiz Díaz" required>
           </div>
-          <div class="campo">
-            <label for="telefono">Telefono / celular</label>
-            <input type="tel" id="telefono" name="telefono" required>
-          </div>
-        </div>
 
-        <div class="campo">
-          <label for="domicilio">Domicilio</label>
-          <input type="text" id="domicilio" name="domicilio" required>
-        </div>
+          <div class="fila">
+            <div class="campo">
+              <label for="correo">Correo electrónico</label>
+              <input type="email" id="correo" name="correo" placeholder="nombre@correo.com" required>
+            </div>
+            <div class="campo">
+              <label for="telefono">Teléfono / celular</label>
+              <input type="tel" id="telefono" name="telefono" placeholder="998 000 0000" required>
+            </div>
+          </div>
 
-        <h2>2. Datos generales</h2>
-        <div class="fila">
           <div class="campo">
-            <label for="edad">Edad</label>
-            <input type="number" id="edad" name="edad" min="1" max="120" required>
-          </div>
-          <div class="campo">
-            <label for="estado_civil">Estado civil</label>
-            <select id="estado_civil" name="estado_civil" required>
-              <option value="">Selecciona...</option>
-              <option value="soltero">Soltero(a)</option>
-              <option value="casado">Casado(a)</option>
-              <option value="union_libre">Union libre</option>
-              <option value="divorciado">Divorciado(a)</option>
-              <option value="viudo">Viudo(a)</option>
-            </select>
-          </div>
-        </div>
-        <div class="campo campo-angosto">
-          <label for="dependientes_economicos">Dependientes economicos</label>
-          <input type="number" id="dependientes_economicos" name="dependientes_economicos" min="0" value="0">
-        </div>
-
-        <h2>3. Situacion laboral y financiera</h2>
-        <div class="fila">
-          <div class="campo">
-            <label for="tipo_empleo">Tipo de empleo</label>
-            <select id="tipo_empleo" name="tipo_empleo" required>
-              <option value="">Selecciona...</option>
-              <option value="asalariado">Asalariado</option>
-              <option value="independiente">Independiente</option>
-              <option value="desempleado">Desempleado</option>
-            </select>
-          </div>
-          <div class="campo">
-            <label for="tipo_ingreso">Tipo de ingreso</label>
-            <select id="tipo_ingreso" name="tipo_ingreso" required>
-              <option value="">Selecciona...</option>
-              <option value="fijo">Fijo</option>
-              <option value="variable">Variable</option>
-            </select>
+            <label for="domicilio">Domicilio</label>
+            <input type="text" id="domicilio" name="domicilio" placeholder="Calle, número, colonia, ciudad" required>
           </div>
         </div>
 
-        <div class="fila">
-          <div class="campo">
-            <label for="antiguedad_laboral_meses">Antiguedad laboral (meses)</label>
-            <input type="number" id="antiguedad_laboral_meses" name="antiguedad_laboral_meses" min="0" required>
+        <div class="seccion-form">
+          <h2><span class="badge-numero">2</span>Datos generales</h2>
+          <div class="fila">
+            <div class="campo">
+              <label for="edad">Edad</label>
+              <input type="number" id="edad" name="edad" min="1" max="120" placeholder="Años" required>
+            </div>
+            <div class="campo">
+              <label for="estado_civil">Estado civil</label>
+              <select id="estado_civil" name="estado_civil" required>
+                <option value="">Selecciona...</option>
+                <option value="soltero">Soltero(a)</option>
+                <option value="casado">Casado(a)</option>
+                <option value="union_libre">Unión libre</option>
+                <option value="divorciado">Divorciado(a)</option>
+                <option value="viudo">Viudo(a)</option>
+              </select>
+            </div>
           </div>
-          <div class="campo">
-            <label for="ingreso_mensual">Ingreso mensual (MXN)</label>
-            <input type="number" id="ingreso_mensual" name="ingreso_mensual" min="1" step="0.01" required>
+          <div class="campo campo-angosto">
+            <label for="dependientes_economicos">Dependientes económicos</label>
+            <input type="number" id="dependientes_economicos" name="dependientes_economicos" min="0" value="0">
           </div>
         </div>
 
-        <div class="fila">
-          <div class="campo">
-            <label for="historial_pagos">Historial de pagos</label>
-            <select id="historial_pagos" name="historial_pagos" required>
-              <option value="">Selecciona...</option>
-              <option value="excelente">Excelente</option>
-              <option value="bueno">Bueno</option>
-              <option value="regular">Regular</option>
-              <option value="malo">Malo</option>
-            </select>
+        <div class="seccion-form">
+          <h2><span class="badge-numero">3</span>Situación laboral y financiera</h2>
+          <div class="fila">
+            <div class="campo">
+              <label for="tipo_empleo">Tipo de empleo</label>
+              <select id="tipo_empleo" name="tipo_empleo" required>
+                <option value="">Selecciona...</option>
+                <option value="asalariado">Asalariado</option>
+                <option value="independiente">Independiente</option>
+                <option value="desempleado">Desempleado</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="tipo_ingreso">Tipo de ingreso</label>
+              <select id="tipo_ingreso" name="tipo_ingreso" required>
+                <option value="">Selecciona...</option>
+                <option value="fijo">Fijo</option>
+                <option value="variable">Variable</option>
+              </select>
+            </div>
           </div>
-          <div class="campo">
-            <label for="deudas_mensuales">Deudas mensuales actuales (MXN)</label>
-            <input type="number" id="deudas_mensuales" name="deudas_mensuales" min="0" step="0.01" value="0">
-          </div>
-        </div>
-        <p class="nota-ayuda">El puntaje crediticio ya no se captura aqui: el propio sistema lo estima a partir del historial de pagos, la estabilidad laboral, el tipo de ingreso y el endeudamiento previo (se muestra en el resultado).</p>
 
-        <h2>4. Datos del prestamo solicitado</h2>
-        <div class="fila">
-          <div class="campo">
-            <label for="monto_solicitado">Monto solicitado (MXN)</label>
-            <input type="number" id="monto_solicitado" name="monto_solicitado" min="1" step="0.01" required>
+          <div class="fila">
+            <div class="campo">
+              <label for="antiguedad_laboral_meses">Antigüedad laboral (meses)</label>
+              <input type="number" id="antiguedad_laboral_meses" name="antiguedad_laboral_meses" min="0" placeholder="Ej. 24" required>
+            </div>
+            <div class="campo">
+              <label for="ingreso_mensual">Ingreso mensual (MXN)</label>
+              <input type="number" id="ingreso_mensual" name="ingreso_mensual" min="1" step="0.01" placeholder="Ej. 18000" required>
+            </div>
           </div>
-          <div class="campo">
-            <label for="plazo_meses">Plazo (meses, 3-120)</label>
-            <input type="number" id="plazo_meses" name="plazo_meses" min="3" max="120" required>
+
+          <div class="fila">
+            <div class="campo">
+              <label for="historial_pagos">Historial de pagos</label>
+              <select id="historial_pagos" name="historial_pagos" required>
+                <option value="">Selecciona...</option>
+                <option value="excelente">Excelente</option>
+                <option value="bueno">Bueno</option>
+                <option value="regular">Regular</option>
+                <option value="malo">Malo</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="deudas_mensuales">Deudas mensuales actuales (MXN)</label>
+              <input type="number" id="deudas_mensuales" name="deudas_mensuales" min="0" step="0.01" value="0">
+            </div>
+          </div>
+          <p class="nota-ayuda">💡 El puntaje crediticio ya no se captura aquí: el propio sistema lo estima a partir del historial de pagos, la estabilidad laboral, el tipo de ingreso y el endeudamiento previo (se muestra en el resultado).</p>
+        </div>
+
+        <div class="seccion-form seccion-final">
+          <h2><span class="badge-numero">4</span>Datos del préstamo solicitado</h2>
+          <div class="fila">
+            <div class="campo">
+              <label for="monto_solicitado">Monto solicitado (MXN)</label>
+              <input type="number" id="monto_solicitado" name="monto_solicitado" min="1" step="0.01" placeholder="Ej. 50000" required>
+            </div>
+            <div class="campo">
+              <label for="plazo_meses">Plazo (meses, 3-120)</label>
+              <input type="number" id="plazo_meses" name="plazo_meses" min="3" max="120" placeholder="Ej. 24" required>
+            </div>
           </div>
         </div>
 
         <p class="errores" id="cajaErrores" hidden></p>
 
-        <button type="submit" class="boton-primario">Evaluar solicitud</button>
-        <button type="button" class="boton-secundario" id="btnVerReglas">Ver base de conocimiento</button>
-        <button type="button" class="boton-secundario" id="btnVerHistorial">Ver historial de solicitudes</button>
+        <div class="acciones-formulario">
+          <button type="submit" class="boton-primario">Evaluar solicitud</button>
+          <button type="button" class="boton-secundario" id="btnVerReglas">Ver base de conocimiento</button>
+          <button type="button" class="boton-secundario" id="btnVerHistorial">Ver historial de solicitudes</button>
+        </div>
       </form>
     </section>
 
@@ -147,7 +176,10 @@
     <section class="panel oculto" id="panelHistorial">
       <h2>Historial de solicitudes evaluadas</h2>
       <div id="contenidoHistorial"></div>
-      <button type="button" class="boton-secundario" id="btnCerrarHistorial">Cerrar</button>
+      <div class="acciones-formulario">
+        <button type="button" class="boton-secundario" id="btnExportarHistorial">📊 Descargar en Excel</button>
+        <button type="button" class="boton-secundario" id="btnCerrarHistorial">Cerrar</button>
+      </div>
     </section>
   </main>
 
